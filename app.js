@@ -5,7 +5,7 @@ const root = document.getElementById('root');
 function render() {
     const db = window.TODS_DB.get();
     const hash = window.location.hash || '#/';
-    
+
     const isAdmin = false; // Admin disabled temporarily
 
     // Route: HOME
@@ -51,19 +51,19 @@ function render() {
                     <!-- IMPACT NUMBERS -->
                     <div class="impact-numbers">
                         <div>
-                            <h3>10</h3>
+                            <h3>2</h3>
                             <p>Chapters</p>
                         </div>
                         <div>
-                            <h3>12,500</h3>
+                            <h3>300</h3>
                             <p>Members</p>
                         </div>
                         <div>
-                            <h3>50+</h3>
+                            <h3>6+</h3>
                             <p>Annual Events</p>
                         </div>
                         <div>
-                            <h3>20K</h3>
+                            <h3>2K</h3>
                             <p>Hours Volunteered</p>
                         </div>
                     </div>
@@ -91,22 +91,22 @@ function render() {
             // Telugu, Hindi, Tamil, Bengali, Marathi
             const langs = ['TELUGU', 'తెలుగు', 'तेलुगु', 'தெலுங்கு', 'তেলেগু', 'तेलगू'];
             let currentLang = 0;
-            
+
             window.langInterval = setInterval(() => {
                 switcher.style.opacity = 0;
                 switcher.style.transform = 'translateX(-30px)'; // Slide out horizontally
-                
+
                 setTimeout(() => {
                     currentLang = (currentLang + 1) % langs.length;
                     switcher.innerText = langs[currentLang];
-                    
+
                     // Turn off transition to instantly warp to the right side
                     switcher.style.transition = 'none';
                     switcher.style.transform = 'translateX(30px)';
-                    
+
                     // Force DOM reflow
                     void switcher.offsetWidth;
-                    
+
                     // Turn transition back on and slide in
                     switcher.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
                     switcher.style.opacity = 1;
@@ -115,7 +115,7 @@ function render() {
             }, 3000);
         }
 
-    // Route: HALL OF FAME
+        // Route: HALL OF FAME
     } else if (hash === '#/hof') {
         // Filter approved hackers
         const approvedHackers = db.hackers.filter(h => h.status === 'approved');
@@ -152,8 +152,8 @@ function render() {
                 </div>
             </section>
         `;
-        
-    // Route: TEAM
+
+        // Route: TEAM
     } else if (hash === '#/about/team') {
         root.innerHTML = `
             <section class="features-section" style="min-height:80vh;">
@@ -178,7 +178,7 @@ function render() {
             </section>
         `;
 
-    // Route: EVENTS
+        // Route: EVENTS
     } else if (hash === '#/events') {
         const upcoming = db.events.filter(e => e.status === 'upcoming');
         const completed = db.events.filter(e => e.status === 'completed');
@@ -213,10 +213,10 @@ function render() {
             </section>
         `;
 
-    // Route: BLOGS
+        // Route: BLOGS
     } else if (hash === '#/blogs') {
         const approvedBlogs = db.blogs.filter(b => b.status === 'approved');
-        
+
         let hybridLayout = '';
         if (approvedBlogs.length > 0) {
             const featured = approvedBlogs[0];
@@ -255,7 +255,7 @@ function render() {
             </section>
         `;
 
-    // Route: ADMIN
+        // Route: ADMIN
     } else if (hash === '#/admin') {
         if (!isAdmin) {
             window.location.hash = '#/';
@@ -318,19 +318,19 @@ function render() {
 
 // Removed toggleLogin and admin handlers temporarily
 
-window.approve = function(type, id) {
+window.approve = function (type, id) {
     window.TODS_DB.approveItem(type, id);
 }
 
-window.addCT = function() {
+window.addCT = function () {
     const name = document.getElementById('ct-name').value;
     const role = document.getElementById('ct-role').value;
-    if(name && role) {
+    if (name && role) {
         window.TODS_DB.addCoreTeam(name, role);
     }
 }
 
-window.removeCT = function(id) {
+window.removeCT = function (id) {
     window.TODS_DB.removeCoreTeam(id);
 }
 
