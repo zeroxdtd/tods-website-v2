@@ -89,7 +89,7 @@ function render() {
         const switcher = document.getElementById('language-switcher');
         if (switcher) {
             // Telugu, Hindi, Tamil, Marathi, Kannada, Malayalam
-            const langs = ['TELUGU', 'తెలుగు', 'तेलुगु', 'தெலுங்கு', 'तेलगू', 'ತೆಲುಗು', 'തെലുങ്ക്'];
+            const langs = ['TELUGU', 'తెలుగు', 'तेलुगु', 'தெலுங்கு', 'ತೆಲುಗು', 'തെലുങ്ക്'];
             let currentLang = 0;
 
             window.langInterval = setInterval(() => {
