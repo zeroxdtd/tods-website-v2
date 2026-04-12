@@ -55,15 +55,15 @@ function render() {
                             <p>Chapters</p>
                         </div>
                         <div>
-                            <h3>300</h3>
+                            <h3>300+</h3>
                             <p>Members</p>
                         </div>
                         <div>
-                            <h3>6+</h3>
-                            <p>Annual Events</p>
+                            <h3>5+</h3>
+                            <p>Annual Meetups</p>
                         </div>
                         <div>
-                            <h3>2K</h3>
+                            <h3>1K</h3>
                             <p>Hours Volunteered</p>
                         </div>
                     </div>
