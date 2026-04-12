@@ -1,46 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODS Community | Telugu Cybersecurity Professionals</title>
-    <link rel="icon" type="image/png" href="./assets/todsfavicon.png">
-    
+    <link rel="icon" type="image/png" href="./assets/transparent.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@800;900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
-    
+
     <style>
         /* Additional SPA Utility Classes */
-        .page { display: none; }
-        .page.active { display: block; }
-        .auth-status { font-size: 0.9rem; margin-right: 1rem; border-right: 2px solid #000; padding-right: 1rem; }
-        
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .auth-status {
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            border-right: 2px solid #000;
+            padding-right: 1rem;
+        }
+
         /* Form & Admin Styles */
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-weight: 800; margin-bottom: 0.5rem; }
-        .form-input { width: 100%; padding: 0.75rem; border: 2px solid var(--clr-border); font-family: var(--font-body); font-size: 1rem; }
-        
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-        
-        .badge-purple { border: 4px solid purple; background: #fdf5ff; }
-        .badge-red { border: 4px solid red; background: #fff5f5; }
-        .badge-blue { border: 4px solid blue; background: #f5f5ff; }
-        
-        .admin-controls { margin-top: 1rem; border-top: 2px solid #000; padding-top: 1rem; }
-        .inline-edit:hover { background-color: #fffcdd; cursor: text; outline: 2px dashed #000; }
-        .status-pill { padding: 0.25rem 0.5rem; font-size: 0.8rem; font-weight: bold; border: 1px solid #000; display: inline-block; }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--clr-border);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .badge-purple {
+            border: 4px solid purple;
+            background: #fdf5ff;
+        }
+
+        .badge-red {
+            border: 4px solid red;
+            background: #fff5f5;
+        }
+
+        .badge-blue {
+            border: 4px solid blue;
+            background: #f5f5ff;
+        }
+
+        .admin-controls {
+            margin-top: 1rem;
+            border-top: 2px solid #000;
+            padding-top: 1rem;
+        }
+
+        .inline-edit:hover {
+            background-color: #fffcdd;
+            cursor: text;
+            outline: 2px dashed #000;
+        }
+
+        .status-pill {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid #000;
+            display: inline-block;
+        }
     </style>
 </head>
+
 <body>
     <!-- Top Announcement Bar -->
     <div class="announcement-bar">
         <div class="marquee" id="dynamic-marquee">
-            <span id="marquee-text">🚀 JOIN THE TODS COMMUNITY TODAY! &nbsp;&bull;&nbsp; UPCOMING EVENT: BEACON 2026 &nbsp;&bull;&nbsp;</span>
+            <span id="marquee-text">🚀 JOIN THE TODS COMMUNITY TODAY! &nbsp;&bull;&nbsp; UPCOMING EVENT: BEACON 2026
+                &nbsp;&bull;&nbsp;</span>
         </div>
     </div>
 
@@ -48,7 +113,8 @@
     <header class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#/" class="logo" style="display: flex; align-items: center;">
-                <img src="./assets/tods%20full.png" alt="TODS Community" style="height: 40px; width: auto; object-fit: contain;">
+                <img src="./assets/transparent.png" alt="TODS Community"
+                    style="height: 40px; width: auto; object-fit: contain;">
             </a>
             <nav class="nav-links">
                 <div class="dropdown">
@@ -78,8 +144,9 @@
     <footer class="site-footer">
         <div class="container footer-container">
             <div class="footer-brand">
-                <img src="./assets/tods%20full.png" alt="TODS Community" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 1rem;">
-                <p>The premier network for Telugu-speaking cybersecurity professionals.</p>
+                <img src="./assets/todsfavicon.png" alt="TODS Community"
+                    style="height: 40px; width: auto; object-fit: contain; margin-bottom: 1rem;">
+                <p>The premier network for తెలుగు-speaking cybersecurity professionals.</p>
             </div>
         </div>
     </footer>
@@ -87,4 +154,5 @@
     <script src="db.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
