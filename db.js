@@ -35,24 +35,24 @@ const initialData = {
             pronouns: '(he/him)',
             role: 'Founder, TODS Community',
             image: 'https://placehold.co/400x400/9cd5fa/000000?text=Dhanush',
-            linkedin: 'https://linkedin.com/'
+            linkedin: 'https://www.linkedin.com/in/danielthotapalli/'
         },
         {
             id: 2,
-            name: 'Jane Smith',
-            pronouns: '(she/her)',
-            role: 'Chief Operations Officer',
+            name: 'Srihaas Tammareddy',
+            pronouns: '(he/him)',
+            role: 'Founding Member',
             image: 'https://placehold.co/400x400/FFD23F/000000?text=Jane',
-            linkedin: 'https://linkedin.com/'
+            linkedin: 'https://www.linkedin.com/in/srihaas-tammareddy/'
         },
-        {
-            id: 3,
-            name: 'Alex Rivera',
-            pronouns: '(they/them)',
-            role: 'Lead Architect',
-            image: 'https://placehold.co/400x400/FF7B54/000000?text=Alex',
-            linkedin: 'https://linkedin.com/'
-        }
+        // {
+        //     id: 3,
+        //     name: 'Alex Rivera',
+        //     pronouns: '(they/them)',
+        //     role: 'Lead Architect',
+        //     image: 'https://placehold.co/400x400/FF7B54/000000?text=Alex',
+        //     linkedin: 'https://linkedin.com/'
+        // }
     ],
     testimonials: [
         { id: 1, name: 'Alex H.', text: 'Best community for Telugu hackers!' }
