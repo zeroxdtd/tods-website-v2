@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODS Community | Telugu Cybersecurity Professionals</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Additional SPA Utility Classes */
+        .page { display: none; }
+        .page.active { display: block; }
+        .auth-status { font-size: 0.9rem; margin-right: 1rem; border-right: 2px solid #000; padding-right: 1rem; }
+        
+        /* Form & Admin Styles */
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 800; margin-bottom: 0.5rem; }
+        .form-input { width: 100%; padding: 0.75rem; border: 2px solid var(--clr-border); font-family: var(--font-body); font-size: 1rem; }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        
+        .badge-purple { border: 4px solid purple; background: #fdf5ff; }
+        .badge-red { border: 4px solid red; background: #fff5f5; }
+        .badge-blue { border: 4px solid blue; background: #f5f5ff; }
+        
+        .admin-controls { margin-top: 1rem; border-top: 2px solid #000; padding-top: 1rem; }
+        .inline-edit:hover { background-color: #fffcdd; cursor: text; outline: 2px dashed #000; }
+        .status-pill { padding: 0.25rem 0.5rem; font-size: 0.8rem; font-weight: bold; border: 1px solid #000; display: inline-block; }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="marquee" id="dynamic-marquee">
+            <span id="marquee-text">🚀 JOIN THE TODS COMMUNITY TODAY! &nbsp;&bull;&nbsp; UPCOMING EVENT: BEACON 2026 &nbsp;&bull;&nbsp;</span>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#/" class="logo">
+                TODS.<span class="bold">COMMUNITY</span>
+            </a>
+            <nav class="nav-links">
+                <div class="dropdown">
+                    <a href="#/about" class="nav-item">About</a>
+                    <div class="dropdown-content">
+                        <a href="#/about/team">Team</a>
+                        <a href="#/about/mission">Mission</a>
+                        <a href="#/about/supporters">Supporters</a>
+                    </div>
+                </div>
+                <a href="#/events" class="nav-item">Events</a>
+                <a href="#/what-we-do" class="nav-item">What We Do</a>
+                <a href="#/sponsor" class="nav-item">Sponsor</a>
+                <a href="#/donate" class="nav-item">Donate</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="#/donate" class="btn btn-ghost" style="text-transform: uppercase;">JOIN</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="root">
+        <!-- SPA Pages will be injected here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h3>TODS.<span class="bold">COMMUNITY</span></h3>
+                <p>The premier network for Telugu-speaking cybersecurity professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
