@@ -213,6 +213,102 @@ function render() {
             </section>
         `;
 
+        // Route: SPONSORS
+    } else if (hash === '#/sponsor') {
+        root.innerHTML = `
+            <section class="features-section" style="min-height:80vh;">
+                <div class="container">
+                    <h1 class="section-title">OUR SPONSORS</h1>
+                    <p style="margin-bottom: 2rem; font-size:1.2rem;">Partnering with industry leaders to secure the future.</p>
+                    <div class="grid-3">
+                        <div class="feature-card" style="text-align:center; background-color: var(--clr-accent-2);">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🏢</div>
+                            <h3>TechCorp Sec</h3>
+                            <p>Platinum Sponsor</p>
+                        </div>
+                        <div class="feature-card" style="text-align:center; background-color: var(--clr-accent-1);">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🛡️</div>
+                            <h3>Defenders Inc</h3>
+                            <p>Gold Sponsor</p>
+                        </div>
+                        <div class="feature-card" style="text-align:center; background-color: white;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🌐</div>
+                            <h3>Global Cyber</h3>
+                            <p>Silver Sponsor</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Route: DONATE
+    } else if (hash === '#/donate') {
+        root.innerHTML = `
+            <section class="features-section" style="min-height:80vh;">
+                <div class="container">
+                    <h1 class="section-title">DONATE</h1>
+                    <div class="feature-card" style="max-width: 600px; margin: 0 auto; text-align: center; background-color: var(--clr-accent-1);">
+                        <h3>Support TODS Community</h3>
+                        <p style="margin: 1.5rem 0; font-size: 1.2rem;">
+                            To make a donation, please drop an email to:
+                        </p>
+                        <a href="mailto:moderators@tods.community?subject=Donation to TODS Community" class="btn btn-primary" style="font-size: 1.2rem; margin-bottom: 1.5rem; text-transform:lowercase;">
+                            moderators@tods.community
+                        </a>
+                        <p>Please use a relevant subject line when reaching out.</p>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Route: WHAT WE DO
+    } else if (hash === '#/what-we-do') {
+        root.innerHTML = `
+            <section class="features-section" style="min-height:80vh;">
+                <div class="container">
+                    <h1 class="section-title">WHAT WE DO</h1>
+                    <div class="feature-card bg-highlight" style="margin-bottom: 2rem;">
+                        <h2>R&D in Cybersecurity</h2>
+                        <p style="font-size: 1.3rem; line-height: 1.6; margin-top: 1rem;">
+                            We are intensely focusing on Research & Development in the cybersecurity space. 
+                            Our goal is to gather the spark in techies and students, encouraging individuals 
+                            to work together as a unified team to bring about tangible, innovative outcomes.
+                        </p>
+                    </div>
+                    <div class="grid-2">
+                        <div class="feature-card" style="background-color: #fff5f5;">
+                            <h3>Collaboration</h3>
+                            <p>Bringing together diverse minds to tackle complex security challenges.</p>
+                        </div>
+                        <div class="feature-card" style="background-color: #f5f5ff;">
+                            <h3>Innovation</h3>
+                            <p>Transforming ideas into actionable tools, research papers, and defenses.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Route: SUPPORTERS
+    } else if (hash === '#/about/supporters') {
+        root.innerHTML = `
+            <section class="features-section" style="min-height:80vh;">
+                <div class="container">
+                    <h1 class="section-title" style="margin-bottom: 2rem;">OUR SUPPORTERS</h1>
+                    <div class="feature-card" style="text-align: center; max-width: 800px; margin: 0 auto; background-color: var(--clr-accent-2);">
+                        <h2 style="margin-bottom: 1rem;">You would be the first kind to support us!</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                            We deeply appreciate your interest in supporting our community.
+                        </p>
+                        <a href="#/donate" class="btn btn-primary">Navigate to Donate Section</a>
+                        <p style="margin-top: 1.5rem;">
+                            Or email us directly at <a href="mailto:moderators@tods.community?subject=Support TODS Community" style="font-weight:bold; color:black; text-decoration: underline;">moderators@tods.community</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        `;
+
         // Route: BLOGS
     } else if (hash === '#/blogs') {
         const approvedBlogs = db.blogs.filter(b => b.status === 'approved');
