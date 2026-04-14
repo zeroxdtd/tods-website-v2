@@ -34,7 +34,7 @@ const initialData = {
             name: 'Daniel Thotapalli',
             pronouns: '(he/him)',
             role: 'Founder, TODS Community',
-            image: 'https://placehold.co/400x400/9cd5fa/000000?text=Dhanush',
+            image: 'https://placehold.co/400x400/9cd5fa/000000?text=zerxdtd',
             linkedin: 'https://www.linkedin.com/in/danielthotapalli/'
         },
         {
@@ -42,7 +42,7 @@ const initialData = {
             name: 'Srihaas Tammareddy',
             pronouns: '(he/him)',
             role: 'Founding Member',
-            image: 'https://placehold.co/400x400/FFD23F/000000?text=Jane',
+            image: 'https://placehold.co/400x400/FFD23F/000000?text=Srihaas',
             linkedin: 'https://www.linkedin.com/in/srihaas-tammareddy/'
         },
         {
@@ -50,7 +50,7 @@ const initialData = {
             name: 'Veerababu (Mr-IoT)',
             pronouns: '(he/him)',
             role: 'Community Advisor',
-            image: 'https://placehold.co/400x400/FF7B54/000000?text=Alex',
+            image: 'https://placehold.co/400x400/FF7B54/000000?text=Mr-IOT',
             linkedin: 'https://www.linkedin.com/in/veeraiot/'
         },
         {
@@ -58,7 +58,7 @@ const initialData = {
             name: 'Shaik Arif Ali',
             pronouns: '(he/him)',
             role: 'Community Management',
-            image: 'https://placehold.co/400x400/FF7B54/000000?text=Alex',
+            image: 'https://placehold.co/400x400/FF7B54/000000?text=Arif',
             linkedin: 'https://www.linkedin.com/in/shaikarifali/'
         }
     ],
