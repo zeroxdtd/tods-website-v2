@@ -116,7 +116,13 @@
                 <img src="./assets/todsfavicon.png" alt="TODS Community"
                     style="height: 100px; width: auto; object-fit: contain;">
             </a>
-            <nav class="nav-links">
+            <!-- Hamburger Menu Toggle (Mobile) -->
+            <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <nav class="nav-links" id="nav-links">
                 <div class="dropdown">
                     <a href="#/about" class="nav-item">About</a>
                     <div class="dropdown-content">
@@ -129,6 +135,14 @@
                 <a href="#/what-we-do" class="nav-item">What We Do</a>
                 <a href="#/sponsor" class="nav-item">Sponsor</a>
                 <a href="#/donate" class="nav-item">Donate</a>
+                <!-- Mobile-only sub-links (visible only in drawer) -->
+                <div class="mobile-sub-links">
+                    <span class="mobile-sub-label">About</span>
+                    <a href="#/about/team" class="nav-item">↳ Team</a>
+                    <a href="#/about/mission" class="nav-item">↳ Mission</a>
+                    <a href="#/about/supporters" class="nav-item">↳ Supporters</a>
+                </div>
+                <a href="#/donate" class="nav-item mobile-join-btn">JOIN</a>
             </nav>
             <div class="nav-actions">
                 <a href="#/donate" class="btn btn-ghost" style="text-transform: uppercase;">JOIN</a>
@@ -153,6 +167,40 @@
 
     <script src="db.js"></script>
     <script src="app.js"></script>
+    <script>
+        // Hamburger Menu Toggle
+        (function() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (hamburgerBtn && navLinks) {
+                hamburgerBtn.addEventListener('click', function() {
+                    const isOpen = navLinks.classList.toggle('nav-open');
+                    hamburgerBtn.classList.toggle('is-active', isOpen);
+                    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                });
+
+                // Close nav when any link is clicked
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('nav-open');
+                        hamburgerBtn.classList.remove('is-active');
+                        hamburgerBtn.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                // Close nav on route change
+                window.addEventListener('hashchange', function() {
+                    navLinks.classList.remove('nav-open');
+                    hamburgerBtn.classList.remove('is-active');
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            }
+        })();
+    </script>
 </body>
 
 </html>

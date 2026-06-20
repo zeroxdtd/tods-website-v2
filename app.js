@@ -328,18 +328,49 @@ function render() {
                     ${event.description || 'No description provided.'}
                 </div>
                 
-                ${pdfUrl ? `
-                    <div style="margin-bottom: 2rem; background: var(--clr-accent-2); padding: 1rem; border: 2px solid #000;">
-                        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h4 style="margin: 0; font-weight: 800;">Event Resource (PDF)</h4>
-                            <a href="${pdfUrl}" target="_blank" download class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Download PDF</a>
-                        </div>
-                        <iframe src="${pdfUrl}" width="100%" height="400px" style="border: 2px solid #000; background: white;"></iframe>
-                    </div>
-                ` : ''}
+                ${pdfUrl ? `<div id="pdf-resource-section" style="margin-bottom: 2rem;"></div>` : ''}
 
                 ${renderSpeakers(event.speakers)}
             `;
+
+            // Check if PDF exists before rendering the embed
+            if (pdfUrl) {
+                const pdfContainer = document.getElementById('pdf-resource-section');
+                fetch(pdfUrl, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            pdfContainer.innerHTML = `
+                                <div style="background: var(--clr-accent-2); padding: 1rem; border: 2px solid #000;">
+                                    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h4 style="margin: 0; font-weight: 800;">Event Resource (PDF)</h4>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <a href="${pdfUrl}" target="_blank" class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Open in New Tab ↗</a>
+                                            <a href="${pdfUrl}" download class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Download PDF ⬇</a>
+                                        </div>
+                                    </div>
+                                    <iframe src="${pdfUrl}" width="100%" height="400px" style="border: 2px solid #000; background: white;"></iframe>
+                                </div>
+                            `;
+                        } else {
+                            pdfContainer.innerHTML = `
+                                <div style="background: #f9f9f9; padding: 1.5rem; border: 2px dashed #ccc; text-align: center;">
+                                    <span style="font-size: 2rem;">📄</span>
+                                    <p style="font-weight: 800; margin: 0.5rem 0; color: #666;">Resource Coming Soon</p>
+                                    <p style="font-size: 0.9rem; color: #999;">The PDF for this event will be uploaded shortly.</p>
+                                </div>
+                            `;
+                        }
+                    })
+                    .catch(() => {
+                        pdfContainer.innerHTML = `
+                            <div style="background: #f9f9f9; padding: 1.5rem; border: 2px dashed #ccc; text-align: center;">
+                                <span style="font-size: 2rem;">📄</span>
+                                <p style="font-weight: 800; margin: 0.5rem 0; color: #666;">Resource Coming Soon</p>
+                                <p style="font-size: 0.9rem; color: #999;">The PDF for this event will be uploaded shortly.</p>
+                            </div>
+                        `;
+                    });
+            }
             
             document.getElementById('event-modal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -448,6 +479,86 @@ function render() {
                         <p style="margin-top: 1.5rem;">
                             Or email us directly at <a href="mailto:moderators@tods.community?subject=Support TODS Community" style="font-weight:bold; color:black; text-decoration: underline;">moderators@tods.community</a>
                         </p>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Route: MISSION
+    } else if (hash === '#/about/mission') {
+        root.innerHTML = `
+            <section class="features-section" style="min-height:80vh;">
+                <div class="container">
+                    <h1 class="section-title" style="margin-bottom: 2rem;">OUR MISSION</h1>
+                    
+                    <div class="feature-card bg-highlight" style="margin-bottom: 2rem;">
+                        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Empowering Telugu Cybersecurity Talent</h2>
+                        <p style="font-size: 1.3rem; line-height: 1.6; margin-top: 1rem;">
+                            TODS Community exists to unite, uplift, and empower Telugu-speaking cybersecurity professionals 
+                            around the world. We believe that security is not just a profession — it is a responsibility. 
+                            Our mission is to build a culture of knowledge sharing, mentorship, and hands-on innovation 
+                            that produces world-class security practitioners from the Telugu community.
+                        </p>
+                    </div>
+                    
+                    <div class="grid-3" style="margin-bottom: 2rem;">
+                        <div class="feature-card" style="background-color: #fff5f5; border-left: 6px solid var(--clr-red);">
+                            <h3 style="color: var(--clr-red);">🔴 OFFENSIVE</h3>
+                            <p>Penetration testing, red teaming, vulnerability research, and exploit development. We train the next generation of ethical hackers.</p>
+                        </div>
+                        <div class="feature-card" style="background-color: #f5f5ff; border-left: 6px solid var(--clr-blue);">
+                            <h3 style="color: var(--clr-blue);">🔵 DEFENSIVE</h3>
+                            <p>SOC operations, incident response, threat hunting, and security architecture. Building resilient systems and defenders.</p>
+                        </div>
+                        <div class="feature-card" style="background-color: #fdf5ff; border-left: 6px solid var(--clr-purple);">
+                            <h3 style="color: var(--clr-purple);">🟣 PURPLE TEAM</h3>
+                            <p>Bridging offense and defense. Collaborative security testing, adversary simulation, and continuous improvement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" style="background-color: #FFFBF0; border: 3px solid #D4AF37; box-shadow: 4px 4px 0px #D4AF37;">
+                        <h3 style="color: #B8860B; font-size: 1.5rem; margin-bottom: 1rem;">🎯 Our Vision</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            To establish the strongest Telugu cybersecurity network globally — connecting professionals, 
+                            students, and enthusiasts through regular meetups, workshops, capture-the-flag competitions, 
+                            and mentorship programs. We aim to be the launchpad that transforms passionate learners 
+                            into industry-leading security experts.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Route: ABOUT (Landing Page)
+    } else if (hash === '#/about') {
+        root.innerHTML = `
+            <section class="features-section" style="min-height:80vh;">
+                <div class="container">
+                    <h1 class="section-title" style="margin-bottom: 2rem;">ABOUT TODS</h1>
+                    <p style="font-size: 1.2rem; margin-bottom: 3rem; max-width: 700px;">
+                        The Telugu Offensive & Defensive Security community — uniting cybersecurity professionals, 
+                        researchers, and enthusiasts from the Telugu-speaking world.
+                    </p>
+                    
+                    <div class="grid-3">
+                        <a href="#/about/team" class="feature-card" style="text-decoration: none; cursor: pointer; background-color: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px var(--clr-purple);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+                            <h3>OUR TEAM</h3>
+                            <p>Meet the core team driving the TODS community forward.</p>
+                            <span style="font-weight: 800; color: var(--clr-purple); margin-top: auto;">VIEW TEAM →</span>
+                        </a>
+                        <a href="#/about/mission" class="feature-card" style="text-decoration: none; cursor: pointer; background-color: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px var(--clr-red);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                            <h3>OUR MISSION</h3>
+                            <p>Our purpose, values, and what drives us in cybersecurity.</p>
+                            <span style="font-weight: 800; color: var(--clr-red); margin-top: auto;">VIEW MISSION →</span>
+                        </a>
+                        <a href="#/about/supporters" class="feature-card" style="text-decoration: none; cursor: pointer; background-color: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px var(--clr-blue);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+                            <h3>SUPPORTERS</h3>
+                            <p>Those who believe in and support our community mission.</p>
+                            <span style="font-weight: 800; color: var(--clr-blue); margin-top: auto;">VIEW SUPPORTERS →</span>
+                        </a>
                     </div>
                 </div>
             </section>

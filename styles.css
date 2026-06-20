@@ -455,10 +455,158 @@ h2.section-title {
     border-top: 1px solid #333;
 }
 
+/* =========================================
+   HAMBURGER MENU (Hidden on Desktop)
+   ========================================= */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 300;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+.hamburger-line {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--clr-foreground);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center;
+}
+
+/* Hamburger → X animation */
+.hamburger.is-active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.is-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger.is-active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile-only elements — hidden on desktop */
+.mobile-sub-links {
+    display: none;
+}
+.mobile-join-btn {
+    display: none;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
-    .nav-links { display: none; }
-    
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hide desktop nav-actions (JOIN button) on mobile */
+    .nav-actions {
+        display: none;
+    }
+
+    /* Mobile Nav Drawer */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--clr-bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        z-index: 250;
+        padding: 2rem;
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    .nav-links.nav-open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        animation: navSlideIn 0.3s ease forwards;
+    }
+
+    @keyframes navSlideIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-links .nav-item {
+        font-size: 1.5rem;
+        font-weight: 800;
+        padding: 1rem 0;
+        font-family: var(--font-heading);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links .nav-item:hover {
+        color: var(--clr-purple);
+    }
+
+    /* Hide desktop dropdown on mobile (use mobile-sub-links instead) */
+    .nav-links .dropdown {
+        display: none;
+    }
+
+    /* Show mobile sub-links */
+    .mobile-sub-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-sub-label {
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #999;
+        letter-spacing: 2px;
+        padding: 0.75rem 0 0.25rem;
+        font-family: var(--font-heading);
+    }
+
+    .mobile-sub-links .nav-item {
+        font-size: 1.2rem;
+        padding: 0.6rem 0;
+        color: var(--clr-purple);
+        border-bottom: 1px dashed rgba(0,0,0,0.08);
+    }
+
+    /* Show mobile JOIN button */
+    .mobile-join-btn {
+        display: block !important;
+        margin-top: 1rem;
+        background-color: var(--clr-accent-1);
+        color: white !important;
+        padding: 0.75rem 2rem !important;
+        border: 3px solid #000;
+        font-weight: 900 !important;
+        font-size: 1.3rem !important;
+        letter-spacing: 2px;
+        box-shadow: 4px 4px 0px #000;
+    }
+
     .hero-container {
         grid-template-columns: 1fr;
     }
@@ -477,6 +625,10 @@ h2.section-title {
         border-right: none;
         border-bottom: var(--border-width) solid var(--clr-border);
     }
+
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* =========================================
@@ -487,6 +639,8 @@ h2.section-title {
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-bottom: 10px; /* Extends hover zone to bridge gap to dropdown-content */
+    margin-bottom: -10px;
 }
 
 .dropdown-content {
@@ -496,7 +650,7 @@ h2.section-title {
     min-width: 160px;
     border: var(--border-width) solid var(--clr-border);
     z-index: 200;
-    top: 100%;
+    top: calc(100% - 2px); /* Slight overlap to prevent hover gap */
     left: 0;
     box-shadow: var(--shadow-default);
 }
