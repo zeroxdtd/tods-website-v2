@@ -180,7 +180,11 @@ function render() {
 
         // Route: EVENTS
     } else if (hash === '#/events') {
-        const todayStr = new Date().toISOString().split('T')[0];
+        const todayIST = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+        const yyyy = todayIST.getFullYear();
+        const mm = String(todayIST.getMonth() + 1).padStart(2, '0');
+        const dd = String(todayIST.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
         
         // Add dynamic status to events
         const processedEvents = db.events.map(e => {
