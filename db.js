@@ -9,7 +9,7 @@ const initialData = {
     ],
     content: {
         intro: "Empowering Telugu-speaking cybersecurity professionals through knowledge sharing, skill development, and community collaboration.",
-        marquee: "🚀 JOIN THE TODS COMMUNITY TODAY! • UPCOMING EVENT: BEACON 2026 •"
+        marquee: "🚀 JOIN THE TODS COMMUNITY TODAY! • UPCOMING EVENT: TBA 2027 •"
     },
     hackers: [
         { id: 1, name: 'Alice Sec', category: 'purple', status: 'approved' },
@@ -17,8 +17,36 @@ const initialData = {
         { id: 3, name: 'Charlie Blue', category: 'blue', status: 'pending' }
     ],
     events: [
-        { id: 1, title: 'Beacon 2026 CTF', date: '2026-10-15', status: 'upcoming' },
-        { id: 2, title: 'Web Sec Workshop', date: '2026-02-10', status: 'completed' }
+        {
+            id: 1,
+            title: 'Networking Meetup Aug 2025',
+            date: '2025-08-09',
+            description: 'Join us for our First Networking Meetup.',
+            pdfLink: 'NetworkingMeetupAug2025.pdf',
+            speakers: [
+                {
+                    name: 'Daniel Thotapalli',
+                    linkedin: 'https://www.linkedin.com/in/danielthotapalli/',
+                    role: 'Founder, TODS Community',
+                    category: 'Founder'
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: 'AI Agentic Usage in CyberSecurity',
+            date: '2026-06-20',
+            description: 'Introduction of Agentic AI and Use Cases in Security Engineering Point of View.',
+            pdfLink: 'websec2026.pdf',
+            speakers: [
+                {
+                    name: 'Amruth P',
+                    linkedin: 'https://www.linkedin.com/in/amruthp-/',
+                    role: 'Cyber Security Researcher',
+                    category: 'red'
+                }
+            ]
+        }
     ],
     blogs: [
         { id: 1, title: 'Intro to Buffer Overflows', author: 'Alice Sec', status: 'approved', content: 'A deep dive into stack smashing.' },

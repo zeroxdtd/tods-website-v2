@@ -180,38 +180,182 @@ function render() {
 
         // Route: EVENTS
     } else if (hash === '#/events') {
-        const upcoming = db.events.filter(e => e.status === 'upcoming');
-        const completed = db.events.filter(e => e.status === 'completed');
+        const todayStr = new Date().toISOString().split('T')[0];
+        
+        // Add dynamic status to events
+        const processedEvents = db.events.map(e => {
+            let status = 'upcoming';
+            if (e.date < todayStr) status = 'completed';
+            else if (e.date === todayStr) status = 'ongoing';
+            return { ...e, status };
+        }).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const upcoming = processedEvents.filter(e => e.status === 'upcoming');
+        const ongoing = processedEvents.filter(e => e.status === 'ongoing');
+        const completed = processedEvents.filter(e => e.status === 'completed');
+
+        const renderSpeakers = (speakers) => {
+            if (!speakers || speakers.length === 0) return '';
+            return `
+                <div class="speakers-container" style="margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 1rem; color: var(--clr-foreground); font-size: 1.2rem;">Featured Speakers</h4>
+                    <div class="grid-2">
+                        ${speakers.map(s => {
+                            let badgeBg = '#f5f5ff'; let badgeBorder = 'var(--clr-blue)'; let badgeColor = 'var(--clr-blue)';
+                            if (s.category === 'offensive' || s.category === 'red') {
+                                badgeBg = '#fff5f5'; badgeBorder = 'var(--clr-red)'; badgeColor = 'var(--clr-red)';
+                            } else if (s.category === 'purple' || s.category === 'both') {
+                                badgeBg = '#fdf5ff'; badgeBorder = 'var(--clr-purple)'; badgeColor = 'var(--clr-purple)';
+                            } else if (s.category.toLowerCase() === 'founder') {
+                                badgeBg = '#FFFBF0'; badgeBorder = '#D4AF37'; badgeColor = '#B8860B';
+                            }
+                            return `
+                            <div class="speaker-card" style="display:flex; align-items:center; gap:1rem; padding: 1rem; background: rgba(0,0,0,0.02); border: 2px solid var(--clr-border); border-radius: 8px;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; background: #333; flex-shrink: 0; border: 2px solid var(--clr-border);">
+                                    <img src="${s.avatarUrl || `https://placehold.co/100x100/333/fff?text=${s.name.charAt(0)}`}" alt="${s.name}" style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <div style="font-weight: 800; font-size: 1.1rem; color: var(--clr-foreground);">${s.name}</div>
+                                    <div style="font-size: 0.9rem; color: #555; margin-bottom: 0.25rem;">${s.role}</div>
+                                    <div style="display:flex; gap: 0.5rem; align-items:center;">
+                                        <span style="background: ${badgeBg}; border: 2px solid ${badgeBorder}; color: ${badgeColor}; padding: 0.1rem 0.4rem; font-size: 0.7rem; text-transform: uppercase; font-weight: bold; border-radius: 4px;">${s.category}</span>
+                                        ${s.linkedin ? `<a href="${s.linkedin}" target="_blank" style="color: var(--clr-blue); text-decoration: underline; font-size: 0.9rem; font-weight: bold;">LinkedIn ↗</a>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderEventCard = (e, isCompleted = false) => {
+            let eventShadow = '#000000'; // Default black shadow
+            let pillColor = '#000000';
+            
+            if (e.speakers && e.speakers.length > 0) {
+                const hasRed = e.speakers.some(s => s.category === 'offensive' || s.category === 'red');
+                const hasBlue = e.speakers.some(s => s.category === 'defensive' || s.category === 'blue');
+                const hasPurple = e.speakers.some(s => s.category === 'purple' || s.category === 'both');
+                const hasFounder = e.speakers.some(s => s.category.toLowerCase() === 'founder');
+                
+                if (hasFounder) {
+                    eventShadow = '#D4AF37';
+                    pillColor = '#D4AF37';
+                } else if (hasPurple || (hasRed && hasBlue)) {
+                    eventShadow = 'var(--clr-purple)';
+                    pillColor = 'var(--clr-purple)';
+                } else if (hasRed) {
+                    eventShadow = 'var(--clr-red)';
+                    pillColor = 'var(--clr-red)';
+                } else if (hasBlue) {
+                    eventShadow = 'var(--clr-blue)';
+                    pillColor = 'var(--clr-blue)';
+                }
+            }
+            
+            // For hover effect, we use CSS variables or inline styles. 
+            // We can just use an inner div or inline style block for the shadow.
+            return `
+            <div class="feature-card event-card" onclick="openEventModal(${e.id})" 
+                 onmouseover="this.style.transform='translate(-4px, -4px)'; this.style.boxShadow='8px 8px 0px ${eventShadow}'" 
+                 onmouseout="this.style.transform='none'; this.style.boxShadow='4px 4px 0px ${eventShadow}'"
+                 style="margin-bottom:1.5rem; cursor: pointer; transition: all 0.2s ease; ${isCompleted ? 'opacity:0.8;' : ''} background-color: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px ${eventShadow}; border-radius: 4px;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">${e.title}</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600; font-size: 1.1rem; color: #333;">Date: ${e.date}</p>
+                <span class="status-pill" style="background-color: ${pillColor}; color: white; border: 2px solid #000; padding: 0.3rem 0.6rem;">${e.status.toUpperCase()}</span>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem; font-weight: bold; text-decoration: none; color: ${pillColor}; display: flex; align-items: center; gap: 0.5rem;">
+                    VIEW EVENT DETAILS <span style="font-size: 1.2rem;">&rarr;</span>
+                </p>
+            </div>
+            `;
+        };
 
         root.innerHTML = `
             <section class="features-section" style="min-height:80vh;">
                 <div class="container">
                     <h1 class="section-title">EVENTS</h1>
+                    
+                    ${ongoing.length > 0 ? `
+                        <div style="margin-bottom: 2rem; border: 4px solid var(--clr-red); padding: 1.5rem; background: #fff5f5; position: relative;">
+                            <div style="position: absolute; top:-4px; right:-4px; background: var(--clr-red); color: white; padding: 0.25rem 1rem; font-weight: 800;">HAPPENING NOW</div>
+                            <h2 style="margin-bottom:1rem; color: var(--clr-red);">ONGOING EVENT</h2>
+                            <div class="grid-2">
+                                ${ongoing.map(e => renderEventCard(e, false)).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
                     <div class="grid-2">
                         <div>
                             <h2 style="margin-bottom:1rem;">UPCOMING EVENTS</h2>
-                            ${upcoming.map(e => `
-                                <div class="feature-card" style="margin-bottom:1rem; background-color: var(--clr-accent-1);">
-                                    <h3>${e.title}</h3>
-                                    <p>Date: ${e.date}</p>
-                                    <span class="status-pill">${e.status.toUpperCase()}</span>
-                                </div>
-                            `).join('') || '<p>No upcoming events.</p>'}
+                            ${upcoming.map(e => renderEventCard(e, false)).join('') || '<p>No upcoming events.</p>'}
                         </div>
                         <div>
                             <h2 style="margin-bottom:1rem;">COMPLETED EVENTS</h2>
-                            ${completed.map(e => `
-                                <div class="feature-card" style="margin-bottom:1rem; opacity:0.8;">
-                                    <h3>${e.title}</h3>
-                                    <p>Date: ${e.date}</p>
-                                    <span class="status-pill">${e.status.toUpperCase()}</span>
-                                </div>
-                            `).join('') || '<p>No completed events.</p>'}
+                            ${completed.map(e => renderEventCard(e, true)).join('') || '<p>No completed events.</p>'}
                         </div>
                     </div>
                 </div>
             </section>
+            
+            <!-- Fullscreen Glassmorphism Modal -->
+            <div id="event-modal" class="event-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index: 1000; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); align-items:center; justify-content:center; padding: 1rem;">
+                <div class="modal-content" style="background: var(--clr-bg); border: 4px solid #000; border-radius: 0px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 12px 12px 0px rgba(0,0,0,1);">
+                    <button onclick="closeEventModal()" style="position:absolute; top: 1rem; right: 1rem; background: #000; border: none; font-size: 1.5rem; width: 40px; height: 40px; display:flex; align-items:center; justify-content:center; cursor: pointer; color: #fff;">&times;</button>
+                    <div id="modal-body" style="padding: 2rem;"></div>
+                </div>
+            </div>
         `;
+
+        window.openEventModal = (id) => {
+            const event = processedEvents.find(e => e.id === id);
+            if (!event) return;
+            
+            // Prevent trivial path traversal / LFI (e.g. going up directories)
+            const safePdfLink = event.pdfLink ? event.pdfLink.replace(/(\.\.\/|\.\.\\)/g, '') : null;
+            const pdfUrl = safePdfLink ? `./resources/${safePdfLink}` : null;
+
+            document.getElementById('modal-body').innerHTML = `
+                <div style="margin-bottom: 1.5rem; padding-right: 3rem;">
+                    <span class="status-pill" style="margin-bottom: 1rem; display:inline-block;">${event.status.toUpperCase()}</span>
+                    <h2 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 0.5rem; font-family: var(--font-heading); font-weight: 900;">${event.title}</h2>
+                    <p style="font-weight: 800; color: var(--clr-purple); font-size: 1.2rem;">Date: ${event.date}</p>
+                </div>
+                
+                <div style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; border-top: 2px solid #000; padding-top: 1.5rem;">
+                    ${event.description || 'No description provided.'}
+                </div>
+                
+                ${pdfUrl ? `
+                    <div style="margin-bottom: 2rem; background: var(--clr-accent-2); padding: 1rem; border: 2px solid #000;">
+                        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h4 style="margin: 0; font-weight: 800;">Event Resource (PDF)</h4>
+                            <a href="${pdfUrl}" target="_blank" download class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Download PDF</a>
+                        </div>
+                        <iframe src="${pdfUrl}" width="100%" height="400px" style="border: 2px solid #000; background: white;"></iframe>
+                    </div>
+                ` : ''}
+
+                ${renderSpeakers(event.speakers)}
+            `;
+            
+            document.getElementById('event-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeEventModal = () => {
+            document.getElementById('event-modal').style.display = 'none';
+            document.body.style.overflow = '';
+        };
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('event-modal');
+            if (event.target === modal) {
+                closeEventModal();
+            }
+        };
 
         // Route: SPONSORS
     } else if (hash === '#/sponsor') {
