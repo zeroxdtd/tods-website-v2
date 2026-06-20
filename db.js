@@ -62,7 +62,7 @@ const initialData = {
             name: 'Daniel Thotapalli',
             pronouns: '(he/him)',
             role: 'Founder, TODS Community',
-            image: 'https://placehold.co/400x400/9cd5fa/000000?text=zerxdtd',
+            image: 'https://placehold.co/400x400/9cd5fa/000000?text=zeroxdtd',
             linkedin: 'https://www.linkedin.com/in/danielthotapalli/'
         },
         {
