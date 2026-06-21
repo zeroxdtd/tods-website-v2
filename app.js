@@ -136,7 +136,7 @@ function render() {
             </section>
         `;
         root.innerHTML = homeHtml;
-        
+
         // Scan for Twitter widget loads
         if (window.twttr && window.twttr.widgets) {
             window.twttr.widgets.load();
@@ -216,7 +216,7 @@ function render() {
         root.innerHTML = `
             <section class="features-section" style="min-height:80vh;">
                 <div class="container">
-                    <h1 class="section-title" style="margin-bottom:4rem;">Our Staff</h1>
+                    <h1 class="section-title" style="margin-bottom:4rem;">Our Team</h1>
                     <div class="team-grid">
                         ${db.coreTeam.map(t => `
                             <div class="team-card">
@@ -243,7 +243,7 @@ function render() {
         const mm = String(todayIST.getMonth() + 1).padStart(2, '0');
         const dd = String(todayIST.getDate()).padStart(2, '0');
         const todayStr = `${yyyy}-${mm}-${dd}`;
-        
+
         // Add dynamic status to events
         const processedEvents = db.events.map(e => {
             let status = 'upcoming';
@@ -263,15 +263,15 @@ function render() {
                     <h4 style="margin-bottom: 1rem; color: var(--clr-foreground); font-size: 1.2rem;">Featured Speakers</h4>
                     <div class="grid-2">
                         ${speakers.map(s => {
-                            let badgeBg = '#f5f5ff'; let badgeBorder = 'var(--clr-blue)'; let badgeColor = 'var(--clr-blue)';
-                            if (s.category === 'offensive' || s.category === 'red') {
-                                badgeBg = '#fff5f5'; badgeBorder = 'var(--clr-red)'; badgeColor = 'var(--clr-red)';
-                            } else if (s.category === 'purple' || s.category === 'both') {
-                                badgeBg = '#fdf5ff'; badgeBorder = 'var(--clr-purple)'; badgeColor = 'var(--clr-purple)';
-                            } else if (s.category.toLowerCase() === 'founder') {
-                                badgeBg = '#FFFBF0'; badgeBorder = '#D4AF37'; badgeColor = '#B8860B';
-                            }
-                            return `
+                let badgeBg = '#f5f5ff'; let badgeBorder = 'var(--clr-blue)'; let badgeColor = 'var(--clr-blue)';
+                if (s.category === 'offensive' || s.category === 'red') {
+                    badgeBg = '#fff5f5'; badgeBorder = 'var(--clr-red)'; badgeColor = 'var(--clr-red)';
+                } else if (s.category === 'purple' || s.category === 'both') {
+                    badgeBg = '#fdf5ff'; badgeBorder = 'var(--clr-purple)'; badgeColor = 'var(--clr-purple)';
+                } else if (s.category.toLowerCase() === 'founder') {
+                    badgeBg = '#FFFBF0'; badgeBorder = '#D4AF37'; badgeColor = '#B8860B';
+                }
+                return `
                             <div class="speaker-card" style="display:flex; align-items:center; gap:1rem; padding: 1rem; background: rgba(0,0,0,0.02); border: 2px solid var(--clr-border); border-radius: 8px;">
                                 <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; background: #333; flex-shrink: 0; border: 2px solid var(--clr-border);">
                                     <img src="${s.avatarUrl || `https://placehold.co/100x100/333/fff?text=${s.name.charAt(0)}`}" alt="${s.name}" style="width:100%; height:100%; object-fit:cover;">
@@ -286,7 +286,7 @@ function render() {
                                 </div>
                             </div>
                             `;
-                        }).join('')}
+            }).join('')}
                     </div>
                 </div>
             `;
@@ -295,13 +295,13 @@ function render() {
         const renderEventCard = (e, isCompleted = false) => {
             let eventShadow = '#000000'; // Default black shadow
             let pillColor = '#000000';
-            
+
             if (e.speakers && e.speakers.length > 0) {
                 const hasRed = e.speakers.some(s => s.category === 'offensive' || s.category === 'red');
                 const hasBlue = e.speakers.some(s => s.category === 'defensive' || s.category === 'blue');
                 const hasPurple = e.speakers.some(s => s.category === 'purple' || s.category === 'both');
                 const hasFounder = e.speakers.some(s => s.category.toLowerCase() === 'founder');
-                
+
                 if (hasFounder) {
                     eventShadow = '#D4AF37';
                     pillColor = '#D4AF37';
@@ -316,7 +316,7 @@ function render() {
                     pillColor = 'var(--clr-blue)';
                 }
             }
-            
+
             // For hover effect, we use CSS variables or inline styles. 
             // We can just use an inner div or inline style block for the shadow.
             return `
@@ -374,7 +374,7 @@ function render() {
         window.openEventModal = (id) => {
             const event = processedEvents.find(e => e.id === id);
             if (!event) return;
-            
+
             // Prevent trivial path traversal / LFI (e.g. going up directories)
             const safePdfLink = event.pdfLink ? event.pdfLink.replace(/(\.\.\/|\.\.\\)/g, '') : null;
             const pdfUrl = safePdfLink ? `./resources/${safePdfLink}` : null;
@@ -433,7 +433,7 @@ function render() {
                         `;
                     });
             }
-            
+
             document.getElementById('event-modal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         };
@@ -443,7 +443,7 @@ function render() {
             document.body.style.overflow = '';
         };
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             const modal = document.getElementById('event-modal');
             if (event.target === modal) {
                 closeEventModal();
@@ -457,7 +457,17 @@ function render() {
                 <div class="container">
                     <h1 class="section-title">OUR SPONSORS</h1>
                     <p style="margin-bottom: 2rem; font-size:1.2rem;">Partnering with industry leaders to secure the future.</p>
-                    <div class="grid-3">
+                    
+                    <div class="feature-card" style="text-align: center; max-width: 800px; margin: 0 auto; background-color: var(--clr-accent-2); border: 3px solid #000; box-shadow: 4px 4px 0px #000;">
+                        <h2 style="margin-bottom: 1rem; font-family: var(--font-heading); font-weight: 900;">You would be the first kind to sponsor us!</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                            We deeply appreciate your interest in supporting our community chapters, workshops, and capture-the-flag competitions.
+                        </p>
+                        <a href="#/donate" class="btn btn-primary">Become a Sponsor</a>
+                    </div>
+
+                    <!-- Dummy sponsors for future reference (uncomment to display)
+                    <div class="grid-3" style="margin-top: 3rem;">
                         <div class="feature-card" style="text-align:center; background-color: var(--clr-accent-2);">
                             <div style="font-size: 4rem; margin-bottom: 1rem;">🏢</div>
                             <h3>TechCorp Sec</h3>
@@ -474,6 +484,7 @@ function render() {
                             <p>Silver Sponsor</p>
                         </div>
                     </div>
+                    -->
                 </div>
             </section>
         `;
