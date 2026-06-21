@@ -1,5 +1,5 @@
 // Simulated Database using LocalStorage for persistence
-const DB_KEY = 'tods_db_2';
+const DB_KEY = 'tods_db_3';
 
 const initialData = {
     currentUser: null, // "admin" | "user" | null
@@ -92,7 +92,20 @@ const initialData = {
     ],
     testimonials: [
         // { id: 1, name: 'Alex H.', text: 'Best community for Telugu hackers!' }
-    ]
+    ],
+    socialFeeds: {
+        youtube: {
+            embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Featured Community Webinar",
+            description: "Check out our latest learning sessions, technical walk-throughs, and community meetups."
+        },
+        twitter: {
+            username: "todscommunity"
+        },
+        linkedin: {
+            embedUrl: "https://www.linkedin.com/embed/feed/update/urn:li:share:7185293847293847293"
+        }
+    }
 };
 
 // Initialize DB if empty

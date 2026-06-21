@@ -81,8 +81,66 @@ function render() {
                     </div>
                 </div>
             </section>
+            
+            <section class="social-hub-section" style="padding: 4rem 0; border-top: 3px solid #000; background: #fff;">
+                <div class="container">
+                    <h2 class="section-title" style="margin-bottom: 3rem; text-align: center; font-family: var(--font-heading); font-weight: 900;">COMMUNITY FEED</h2>
+                    <div class="grid-3" style="align-items: stretch; gap: 2rem;">
+                        <!-- Column 1: YouTube -->
+                        <div class="feature-card" style="display: flex; flex-direction: column; background: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px #FF0000; border-radius: 0px; padding: 1.5rem; min-height: 480px;">
+                            <h3 style="margin-top:0; border-bottom: 2px solid #000; padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem;">
+                                <svg style="width: 24px; height: 24px; fill: #FF0000;" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.5 12 3.5 12 3.5s-7.518 0-9.388.553a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.553 9.388.553 9.388.553s7.518 0 9.388-.553a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                YouTube Updates
+                            </h3>
+                            <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1rem;">
+                                <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border: 2px solid #000;">
+                                    <iframe style="position: absolute; top:0; left:0; width:100%; height:100%;" src="${db.socialFeeds.youtube.embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h4 style="margin: 0; font-size: 1.1rem;">${db.socialFeeds.youtube.title}</h4>
+                                <p style="margin: 0; font-size: 0.95rem; color: #555; flex-grow: 1; line-height: 1.5;">${db.socialFeeds.youtube.description}</p>
+                                <a href="https://www.youtube.com/@tods.community" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="text-align: center; width: 100%; border: 2px solid #000; margin-top: auto;">Subscribe ↗</a>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: LinkedIn -->
+                        <div class="feature-card" style="display: flex; flex-direction: column; background: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px var(--clr-blue); border-radius: 0px; padding: 1.5rem; min-height: 480px;">
+                            <h3 style="margin-top:0; border-bottom: 2px solid #000; padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem;">
+                                <svg style="width: 24px; height: 24px; fill: #0077B5;" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                                LinkedIn Updates
+                            </h3>
+                            <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1rem;">
+                                <div style="border: 2px solid #000; height: 200px; overflow: hidden; background: #f9f9f9; position: relative;">
+                                    <iframe src="${db.socialFeeds.linkedin.embedUrl}" width="100%" height="100%" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                                </div>
+                                <p style="margin: 0; font-size: 0.95rem; color: #555; flex-grow: 1; line-height: 1.5;">Follow our official LinkedIn page for immediate alerts, student spotlights, and security tips.</p>
+                                <a href="https://www.linkedin.com/company/todscommunity/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="text-align: center; width: 100%; border: 2px solid #000; margin-top: auto;">Follow on LinkedIn ↗</a>
+                            </div>
+                        </div>
+
+                        <!-- Column 3: X (Twitter) -->
+                        <div class="feature-card" style="display: flex; flex-direction: column; background: #ffffff; border: 3px solid #000; box-shadow: 4px 4px 0px #000; border-radius: 0px; padding: 1.5rem; min-height: 480px;">
+                            <h3 style="margin-top:0; border-bottom: 2px solid #000; padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem;">
+                                <svg style="width: 24px; height: 24px; fill: #000000;" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                X Timeline
+                            </h3>
+                            <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1rem;">
+                                <div style="border: 2px solid #000; height: 200px; overflow-y: auto; background: #f9f9f9; padding: 0.25rem;">
+                                    <a class="twitter-timeline" data-height="195" data-theme="light" href="https://twitter.com/${db.socialFeeds.twitter.username}?ref_src=twsrc%5Etfw">Tweets by @${db.socialFeeds.twitter.username}</a>
+                                </div>
+                                <p style="margin: 0; font-size: 0.95rem; color: #555; flex-grow: 1; line-height: 1.5;">Check out live announcements, event retweets, and quick community notices from our feed.</p>
+                                <a href="https://x.com/${db.socialFeeds.twitter.username}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="text-align: center; width: 100%; border: 2px solid #000; margin-top: auto;">View on X ↗</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
         root.innerHTML = homeHtml;
+        
+        // Scan for Twitter widget loads
+        if (window.twttr && window.twttr.widgets) {
+            window.twttr.widgets.load();
+        }
 
         // Animated Language Switcher Logic
         if (window.langInterval) clearInterval(window.langInterval);

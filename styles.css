@@ -839,3 +839,72 @@ h2.section-title {
     font-size: 1.1rem;
     color: #444;
 }
+
+/* =========================================
+   SOCIAL MEDIA ICONS (FOOTER & HUB)
+   ========================================= */
+
+.social-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--clr-white);
+    border: 3px solid #000;
+    color: #000;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+.social-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Hover transitions and offsets */
+.social-icon-btn:hover {
+    transform: translate(-3px, -3px);
+}
+
+.social-icon-btn.linkedin:hover {
+    background-color: var(--clr-blue);
+    color: white;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.social-icon-btn.twitter:hover {
+    background-color: #000;
+    color: white;
+    box-shadow: 4px 4px 0px var(--clr-accent-2);
+}
+
+.social-icon-btn.youtube:hover {
+    background-color: #FF0000;
+    color: white;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.social-icon-btn.instagram:hover {
+    background-color: #E1306C;
+    color: white;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.social-icon-btn.whatsapp:hover {
+    background-color: #25D366;
+    color: white;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.social-icon-btn.private-ctf {
+    border-color: #D4AF37;
+}
+
+.social-icon-btn.private-ctf:hover {
+    background-color: #FFFBF0;
+    color: #B8860B;
+    border-color: #000;
+    box-shadow: 4px 4px 0px #D4AF37;
+}
